@@ -30,6 +30,7 @@ The current benchmarks are:
 * `euclid`: Calculates the greatest common divisor between two large numbers using the [Euclidean Algorithm][euclid] with a helper function for the modulo operator.
 * `euler`: Approximates [Euler's number][euler] using the Taylor series.
 * `fact`: Prints the factorial of *n*, computing it recursively.
+* `fibonacci`: Prints the *nth* Fibonacci number, computing it recursively.
 * `factors`: Print the factors of the *n* using the [trial division][trialdivision] method.
 * `fib`: Calculate the *n*th Fibonacci number by allocating and filling an [array](../lang/memory.md) of numbers up to that point.
 * `fizz-buzz`: The infamous [programming test][fizzbuzz].

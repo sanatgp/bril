@@ -1,0 +1,31 @@
+# Recursive Fibonacci Computation
+
+# ARGS: 20
+@main(a: float) {
+  res: float = call @Fibonacci a;
+  res: float = id res;
+  v15: float = id res;
+  print v15;
+  v16: int = const 0;
+}
+
+@Fibonacci(n: float): float {
+  v1: float = id n;
+  v2: float = const 1;
+  v3: bool = fle v1 v2;
+  br v3 .then.0 .else.0;
+.then.0:
+  v4: float = id n;
+  ret v4;
+.else.0:
+  v5: float = id n;
+  v6: float = const 1;
+  v7: float = fsub v5 v6;
+  v8: float = call @Fibonacci v7;
+  v9: float = id n;
+  v10: float = const 2;
+  v11: float = fsub v9 v10;
+  v12: float = call @Fibonacci v11;
+  v13: float = fadd v8 v12;
+  ret v13;
+}
