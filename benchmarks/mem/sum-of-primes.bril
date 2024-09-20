@@ -1,0 +1,129 @@
+# calculate sum of primes
+@sumOfPrimes(n: int): int {
+  sum: int = const 0;
+  nums: ptr<int> = alloc n;
+  i: int = const 0;
+  one: int = const 1;
+  two: int = const 2;
+  zero: int = const 0;
+
+.init_loop:
+  cond: bool = lt i n;
+  br cond .init_body .init_done;
+.init_body:
+  loc: ptr<int> = ptradd nums i;
+  store loc one;
+  i: int = add i one;
+  jmp .init_loop;
+.init_done:
+
+  # non-primes
+  current: int = const 2;
+.outer_loop:
+  current_squared: int = mul current current;
+  outer_cond: bool = le current_squared n;
+  br outer_cond .outer_body .sum_primes;
+.outer_body:
+  i: int = mul current current;
+.inner_loop:
+  inner_cond: bool = lt i n;
+  br inner_cond .inner_body .continue_outer;
+.inner_body:
+  loc: ptr<int> = ptradd nums i;
+  store loc zero;
+  i: int = add i current;
+  jmp .inner_loop;
+.continue_outer:
+  current: int = add current one;
+  jmp .outer_loop;
+
+  # Sum primes
+.sum_primes:
+  i: int = const 2;
+.sum_loop:
+  cond: bool = lt i n;
+  br cond .sum_body .done;
+.sum_body:
+  loc: ptr<int> = ptradd nums i;
+  is_prime: int = load loc;
+  is_prime_bool: bool = eq is_prime one;
+  br is_prime_bool .add_prime .continue;
+.add_prime:
+  sum: int = add sum i;
+.continue:
+  i: int = add i one;
+  jmp .sum_loop;
+
+.done:
+  free nums;
+  ret sum;
+}
+
+#calculate sum of composite numbers
+@sumOfComposites(n: int): int {
+  sum: int = const 0;
+  nums: ptr<int> = alloc n;
+  i: int = const 0;
+  one: int = const 1;
+  two: int = const 2;
+  zero: int = const 0;
+
+.init_loop:
+  cond: bool = lt i n;
+  br cond .init_body .init_done;
+.init_body:
+  loc: ptr<int> = ptradd nums i;
+  store loc one;
+  i: int = add i one;
+  jmp .init_loop;
+.init_done:
+
+  #non-primes
+  current: int = const 2;
+.outer_loop:
+  current_squared: int = mul current current;
+  outer_cond: bool = le current_squared n;
+  br outer_cond .outer_body .sum_composites;
+.outer_body:
+  i: int = mul current current;
+.inner_loop:
+  inner_cond: bool = lt i n;
+  br inner_cond .inner_body .continue_outer;
+.inner_body:
+  loc: ptr<int> = ptradd nums i;
+  store loc zero;
+  i: int = add i current;
+  jmp .inner_loop;
+.continue_outer:
+  current: int = add current one;
+  jmp .outer_loop;
+
+  # Sum composites
+.sum_composites:
+  i: int = const 4;  # Start from 4, as 1 is neither prime nor composite!!
+.sum_loop:
+  cond: bool = lt i n;
+  br cond .sum_body .done;
+.sum_body:
+  loc: ptr<int> = ptradd nums i;
+  is_prime: int = load loc;
+  is_composite: bool = eq is_prime zero;
+  br is_composite .add_composite .continue;
+.add_composite:
+  sum: int = add sum i;
+.continue:
+  i: int = add i one;
+  jmp .sum_loop;
+
+.done:
+  free nums;
+  ret sum;
+}
+
+@main {
+  input: int = const 100; 
+  primes_sum: int = call @sumOfPrimes input;
+  print primes_sum;
+  composites_sum: int = call @sumOfComposites input;
+  print composites_sum;
+}
