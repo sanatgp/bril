@@ -1,0 +1,21 @@
+@main {
+    a: int = const 1;
+    b: int = const 2;
+
+    c: int = add a b;
+    d: int = add a b;    # Redundant computation
+    e: int = add b a;    # Redundant due to commutativity
+    f: int = mul c d;
+    g: int = mul c e;    # Redundant computation
+
+    sum1: int = add a b; # Same as c, d, and e
+    sum2: int = add a b; # Same as c, d, e, and sum1
+    prod: int = mul sum1 sum2; # Uses two identical values
+
+    h: int = sub f g;    # Dead code: computed but never used
+    i: int = add a a;    # Dead code: computed but never used
+
+    print f;
+    print g;
+    print prod;
+}

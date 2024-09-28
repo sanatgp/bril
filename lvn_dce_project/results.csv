@@ -1,0 +1,5 @@
+benchmark,run,result
+test_lvn,baseline,15
+test_lvn,dce,13
+test_lvn,lvn,11
+test_lvn,lvn_dce,9
