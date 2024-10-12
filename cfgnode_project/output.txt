@@ -1,0 +1,16 @@
+Block: entry
+  In:  []
+  Out: ['a', 'b', 'd']
+
+Block: b2
+  In:  ['a', 'b']
+  Out: ['b', 'c', 'd']
+
+Block: b3
+  In:  ['b', 'd']
+  Out: ['b', 'c', 'd']
+
+Block: done
+  In:  ['b', 'c', 'd']
+  Out: []
+

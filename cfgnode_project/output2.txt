@@ -1,0 +1,16 @@
+Block: entry
+  In:  []
+  Out: ['result1', 'result2', 'w', 'z']
+
+Block: then
+  In:  ['result2', 'w', 'z']
+  Out: ['result1', 'result2']
+
+Block: else
+  In:  ['result1', 'w', 'z']
+  Out: ['result1', 'result2']
+
+Block: end
+  In:  ['result1', 'result2']
+  Out: []
+
