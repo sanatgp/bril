@@ -1,0 +1,32 @@
+{
+  "functions": [
+    {
+      "name": "main",
+      "instrs": [
+        { "label": "entry" },
+        { "op": "const", "dest": "a", "type": "int", "value": 0 },
+        { "op": "jmp", "labels": ["L1"] },
+
+        { "label": "L1" },
+        { "op": "add", "args": ["a"], "dest": "b", "type": "int" },
+        { "op": "br", "args": ["b"], "labels": ["L2", "L3"] },
+
+        { "label": "L2" },
+        { "op": "const", "dest": "c", "type": "int", "value": 5 },
+        { "op": "jmp", "labels": ["L4"] },
+
+        { "label": "L3" },
+        { "op": "const", "dest": "d", "type": "int", "value": 10 },
+        { "op": "jmp", "labels": ["L4"] },
+
+        { "label": "L4" },
+        { "op": "mul", "args": ["b"], "dest": "e", "type": "int" },
+        { "op": "jmp", "labels": ["L5"] },
+
+        { "label": "L5" },
+        { "op": "ret", "args": ["e"] }
+      ]
+    }
+  ]
+}
+
